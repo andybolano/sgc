@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html ng-app="sgc" class="light-blue darken-4">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SGC - Valledupar</title> 
+       <link href="css/materialize.css" rel="stylesheet"/>
+   
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../public/favicon.ico" type="image/x-icon">
+         <link rel="icon" href="../public/favicon.ico" type="image/x-icon">
+              <link href="css/animate.css" rel="stylesheet">
+    </head>
+    <body>
+        <div ng-controller="loginController">          
+               <div class="row light-blue darken-4" style="margin-top: 5%;">
+                   
+                   <div class="col s12 animated bounceIn" style="text-align: center;">
+                       <a href="http://www.appccvalledupar.co/"><img src="images/logo.png"></a>
+                       
+                   </div>
+                   <div class="offset-s4 col s4 z-depth-2 white animated bounceInLeft" style="border-radius: 5px;padding: 20px;"> 
+                       <div class="row">
+                           <div class="col s12" style="text-align: center">
+                                <h2 style="font-weight:900">Sistema de Gestión de Calidad</h2>
+                        <h2 >Iniciar Sesion</h2>
+                           </div>
+                            <div class="col s12" style="text-align: center;color:red;" id="error">
+                    
+                           </div>
+                       </div>
+                       <form>
+                         <input type="hidden" name="_token" value="{{ csrf_token()}}"/>
+                    	<div class="row">                                    
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-account-circle prefix"></i>
+                                        <input type="text" ng-model="Usuario.user" id="username" name="username" maxlength="30" required min="3">
+                                     
+                                    </div>
+                        </div>
+                        <div class="row"> 
+                                    <div class="input-field col s12">
+                                        <i class="mdi-communication-vpn-key prefix"></i>
+                                        <input type="password" ng-model="Usuario.clave" id="pass" name="pass" maxlength="30" required min="3">
+                                    
+                                    </div>
+                                    <!--    <div class="input-field col s2">
+                                            <button  type="button"  class=" waves-red red accent-4 mdi-action-autorenew btn-floating" title="Restablecer Contraseña"></button>
+                                        </div>-->
+                                </div> 
+                        <div class="row">
+                            <div class="col s12 flash" style="text-align: center;">
+                                <button type="submit" ng-click="iniciarSesion()" class="signin-db waves-effect waves-light   btn light-blue darken-4 fadeInDown"><i class="mdi-hardware-keyboard-arrow-left left"></i>Entrar</button>
+                            </div>
+                       
+                        </div>
+                  </form>
+                
+                   </div>
+            </div>
+        </div>
+
+        <!-- jQuery and  -->
+
+        <script src="js/jquery/jquery-2.1.1.min.js"></script>
+        <script src="js/materialize.js" type="text/javascript"></script>
+        <script src="js/angular/angular.js"></script>
+        <script src="js/angular/angular-route.js" type="text/javascript"></script>
+        <script src="js/angular/ui-utils.min.js" type="text/javascript"></script> 
+        <script src="scripts/app.js" type="text/javascript"></script>
+
+        <!-- controladores-->
+        <script src="scripts/controllers/loginController.js" type="text/javascript"></script>
+ 
+         
+         <!--Service--->
+         <script src="scripts/services/loginService.js" type="text/javascript"></script>
+
+    </body>
+</html>

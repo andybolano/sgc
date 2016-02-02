@@ -1,0 +1,191 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21-ene-2016, 11:24:38
+    Author     : AndyBolaño
+*/
+body,html{
+       font-family: "Roboto", sans-serif;
+       background-color: #FFFFFF;
+       height:100%;
+width: 100%;
+margin: 0;
+padding: 0;
+font-size:12px;
+
+}
+.bg{
+height:100%;
+width: 100%;
+background-size: cover;
+background-image:url('../images/bg.png');
+}
+
+.line{
+   border-width: 1px; border-style: dashed; border-color:#01579b;
+  margin: 0;padding: 0;
+  width: 80px;
+  z-index: 1001;
+}
+
+.title{
+    border:2px solid #01579b ;
+    border-radius:10px;
+    padding:8px;
+    width:600px;
+    font-weight: 900;
+  position: fixed;
+  margin-left:85px;
+    
+}
+
+.l1{ 
+ transform:rotate(-45deg);
+ position: fixed;
+ margin-left: 200px;
+ margin-top: 40px;
+}
+
+
+.l2{ 
+ transform:rotate(45deg);
+ position: fixed;
+ margin-left: 520px;
+ margin-top: 40px;
+}
+
+
+.circle{
+    padding-top:20px;
+    padding-left:5px;
+     padding-right:5px;
+    text-align: center;
+    color:#FFFFFF;
+    background-color: #0288d1;
+    border:3px solid #01579b ;
+    width: 20%;
+    border-radius: 50%;
+    height:80px;
+    width: 95px;
+    margin-top: 7%;
+    position: fixed;
+}
+
+.izq{
+    float: left;
+    margin-left: 130px;
+    margin-top: 60px;
+}
+
+.der{
+    float:right;
+    margin-right:0px;
+    margin-left: 560px;
+    margin-top: 60px;
+}
+
+
+
+.l3{ 
+ transform:rotate(45deg);
+ position: fixed;
+ margin-left: 210px;
+ margin-top: 180px;
+}
+
+.l4{ 
+ transform:rotate(-45deg);
+ position: fixed;
+ margin-left: 510px;
+ margin-top: 40px;
+ margin-top: 180px;
+}
+
+.centro{
+    padding-top:20px;
+    padding-left:5px;
+     padding-right:5px;
+    text-align: center;
+    color:#FFFFFF;
+    width: 20%;
+    border-radius: 50%;
+    height:230px;
+    width: 280px;
+    
+    background-color: #0288d1;
+    border:3px solid #01579b ;
+}
+
+
+.circle_2{
+    padding-top:20px;
+    padding-left:5px;
+     padding-right:5px;
+    text-align: center;
+    color:#FFFFFF;
+    width: 20%;
+    border-radius: 50%;
+    height:100px;
+    width: 120px;
+    margin-top: -180px;
+     background-color: #0288d1;
+    border:3px solid #01579b ;
+    position: fixed;
+}
+
+.izq_2{
+     float: left;
+    margin-left: 130px;
+    margin-top: 230px;
+}
+
+.der_2{
+    float:right;
+    margin-right:0px;
+    margin-left: 670px;
+    margin-top: 230px;
+}
+.footer{
+    border:2px solid #01579b ;
+    border-radius:10px;
+    padding:8px;
+    width: 100%;
+ 
+     width:700px;
+     margin-left:46px;
+    
+}
+
+
+.l5{ 
+    width:115px;
+ position: fixed;
+ margin-left:140px;
+ margin-top: 290px;
+}
+
+.l6{ 
+    width:115px;
+ position: fixed;
+ margin-left:550px;
+ margin-top: 290px;
+}
+
+.l7{ 
+ transform:rotate(-45deg);
+width:115px;
+ position: fixed;
+ margin-left:215px;
+ margin-top: 440px;
+}
+
+.l8{ 
+ transform:rotate(45deg);
+  width:115px;
+ position: fixed;
+ margin-left:470px;
+ margin-top: 440px;
+}

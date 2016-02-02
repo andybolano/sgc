@@ -1,0 +1,80 @@
+<div class="contenedor" style="zoom:85%;"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+             
+
+                  
+            
+            <div class="contenedor" ng-controller="archivosController" >
+                <input type="hidden" value="" id="idCambio">
+                <div  style="position:absolute;top: 155px; right: 24px;">
+                         <img src="../../images/loading.gif" width="40px" style="display:none;" id="loading">
+                </div>
+                         <div class="row">
+                    <div class="col s12" >  
+                        <h2>Gestion de Archivos</h2>
+                        <br
+                            <div class="row">
+                         <div class="col s6">
+                    	<section id="envio">
+                            <form>
+                                    <input type="file" id="files" name="files[]" onchange="angular.element(this).scope().visualizar()" multiple>
+                            </form>
+                        </section>
+                        </div> 
+                    
+                                  <div class="col s6" style="text-align: right">
+                                        <button class="btn red" id="subirArchivos" onclick="angular.element(this).scope().cargarTodo()">Subir Archivos</button>
+                                    </div> 
+                        </div>
+                        <div class="row">
+                                         <table >
+                                            <thead>
+                                            <th width="20%">Nombre</th>
+                                            <th width="10%">Proceso</th>
+                                            <th width="15%">Subproceso</th>
+                                            <th width="10%">Tipo de Doc.</th>
+                                             <th width="5%">Tamaño</th>
+                                            <th width="5%">Version</th>
+                                            <th width="5%">Actualizacion</th>
+                                            <th width="15%">Responsable del doc.</th>
+                                            <th width="15%">Responsable de apro.</th>
+                                            <th width="5%" style="text-align: center">Cambio.</th>
+                                           
+                           
+                                            </thead>
+                                            <tbody id="lista">
+
+                                            </tbody>
+                                        </table> 
+                        </div>
+                    </div>
+                             
+                         <div class="modal modal-fixed-footer" id="cambios">
+                           <div class="modal-content">
+                               <p style="font-size:16px;">Cambios realizados en : <span id="nombreArchivo" style="font-weight:600"></span> </p>
+                               <div class="row">
+                                   <textarea id="cambiosRealizados" value="" autofocus>
+                                       
+                                   </textarea>
+                               </div>
+                            </div>
+                                 <div class="modal-footer">
+                                        <a href="javascript:;"  onclick="guardar()" class="modal-action modal-close waves-effect waves-light btn green " style="margin-left:10px;">Guardar</a>
+                                        <a href="javascript:;" onclick="$('#cambiosRealizados').val();" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Cancelar</a>
+                                </div>
+                        </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <script>
+        function guardar(){
+            var i = document.getElementById("idCambio").value;
+            var test = $('#cambiosRealizados').val();
+          $('input[name="cambios'+i+'"]').val(test);
+           document.getElementById("idCambio").value="";
+           $('#cambiosRealizados').val("");
+        }
+        </script>

@@ -1,0 +1,56 @@
+<div class="contenedor"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+            <div class="contenedor">
+                <div class="row">
+
+<div class="col s12" ng-controller="tipodocumentoController">  
+                        <h2>Gestion de Tipo de Documentos</h2>
+                        <table  class="striped">
+                            <thead>
+                            <th width="20px">
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th width="60px">
+                                Sigla
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: transparent;">
+                                    <td><input type="text" ng-model="Documentos.id" disabled="true"></td>
+                                    <td><input type="text" ng-model="Documentos.nombre"></td>
+                                    <td><input type="text" ng-model="Documentos.sigla"></td>
+                                    <td><button class="btn waves-effect waves-light green " title="Guardar" id="guardar_d" ng-click="guardar();" disabled="" ><i class="material-icons" >save</i></button></td>
+                                    <td><button class="btn waves-effect waves-light blue"  title="Actualizar" id="actualizar_d" ng-click="modificar();" disabled=""  ><i class="material-icons" >reply</i></button></td>
+                                    <td><button class="btn waves-effect waves-light red"  title="limpiar" id="limpiar_d" ng-click="limpiar();" ><i class="material-icons" >clear</i></button></td>
+                                </tr>
+                                <tr ng-repeat ="item in listaDocumentos">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.nombre}}</td>
+                                    <td>{{item.sigla}}</td>
+                                    <td></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="editar" ng-click="cargarModificar(item);"><i class="material-icons">create</i></a></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="editar"><i class="material-icons" style="color:#F44336">remove</i></a></td>
+                                </tr>
+                            </tbody>    
+                        </table>
+                  </div>
+                    
+                              </div>
+        </div>
+    </div>
+   
+
+
+</div>
