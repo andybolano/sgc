@@ -28,5 +28,11 @@ Route::get('/', function () {
 
 include 'Routes/routesProcesos.php';
 include 'Routes/routesDocumentos.php';
+include 'Routes/routesSolicitudes.php';
 include 'Routes/routesSubprocesos.php';
 include 'Routes/routesArchivos.php';
+
+include 'Routes/routesCategorias.php';
+include 'Routes/routesSubcategorias.php';
+include 'Routes/routesIndicadores.php';
+include 'Routes/routesMedidas.php';

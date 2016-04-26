@@ -1,0 +1,352 @@
+<div class="contenedor" style="zoom:85%;"  ng-controller="indicadoresController" data-ng-init="categorias();procesos();medidas();refrescar();"> 
+    <div class="row">
+        <div class="col s4 z-depth-1 white" style="margin-left: -10px;">
+            <div class="contenedor">
+                <div class="row">
+                  <div class="col s12">  
+                        <h2>Gestion de Indicadores</h2>
+                        <table width="100%">
+                            <tr>
+                                <td><label>Id</label></td>
+                                <td colspan="2"><input type="text" ng-model="Indicadores.id" disabled="true"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Nombre</label></td>
+                                <td colspan="2"><input type="text" ng-model="Indicadores.nombre"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Fuente:</label></td>
+                                <td colspan="2"><input type="text" ng-model="Indicadores.fuente"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Categoria:</label></td>
+                                <td colspan="2"> <select ng-model="Indicadores.categoria" id="categoria" class="browser-default" ng-change="subcategorias()">
+                                           <option ng-repeat="item in listaCategorias" value="{{item.id}}" >{{item.nombre}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td><label>Subcategoria:</label></td>
+                                <td colspan="2">   <select ng-model="Indicadores.subcategoria" id="subcategoria" class="browser-default">
+                                           <option ng-repeat="item in listaSubcategorias" value="{{item.id}}">{{item.nombre}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td><label>Frecuencia:</label></td>
+                                <td colspan="2">            
+                            <select ng-model="Indicadores.frecuencia" id="frecuencia" class="browser-default">
+                                           <option  value="1">Mensual</option>
+                                           <option  value="2">Bimensual</option>
+                                           <option  value="3">Trimestral</option>
+                                           <option  value="6">Semestral</option>
+                                           <option  value="12">Anual</option>
+                                        </select>
+                                </td>
+                        </tr>
+                        <tr>
+                            <td><label>Unidad de Medida:</label></td>
+                            <td>
+                    <select ng-model="Indicadores.unidadMedida" id="medida" class="browser-default" ng-change="nombreUnidad();">
+                                           <option ng-repeat="item in listaMedidas" value="{{item.id}}">{{item.nombre}}</option>
+                    </select> </td>
+                    <td style="text-align: right">
+                        <a href="javascript:;"><i class="material-icons" style="color:#00C853;font-size:28px;" title="Agregar nueva unidad de medidad" ng-click="modalUnidad();">add</i></a>
+                                </td>
+                        <tr>
+                            <td><label>Proceso:</label></td>
+                            <td colspan="2"> <select ng-model="Indicadores.proceso" id="proceso" class="browser-default" ng-change="subprocesos()">
+                                         <option ng-repeat="item in listaProcesos" value="{{item.id}}">{{item.nombre}}</option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td><label>Subproceso:</label></td>
+                            <td colspan="2"> <select ng-model="Indicadores.subproceso" id="proceso" class="browser-default">
+                                         <option ng-repeat="item in listaSubprocesos" value="{{item.id}}">{{item.nombre}}</option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td><label>Sentido:</label></td>
+                            <td colspan="2"> <select ng-model="Indicadores.sentido" id="medida" class="browser-default">
+                                           <option  value="1">POSITIVO</option>
+                                           <option  value="0">NEGATIVO</option>
+                                </select> </td>
+                        </tr>
+                      
+                            <tr>
+                                <td></td>
+                                <td><label>Valor Maximo</label></td>
+                                 <td><label>Valor Minimo</label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Meta:</label></td>
+                                <td>[<input type="number" style="width:90%;" ng-model="Indicadores.limiteInferior"></td>
+                                <td><input type="number" style="width:90%;" ng-model="Indicadores.limiteSuperior">]</td>
+                            </tr>
+                            <tr>
+                                <td><label>Numerador:</label></td>
+                                <td>
+                                    <input type="text" ng-model="Indicadores.nombre_numerador" placeholder="Nombre de la variable">
+                                </td>
+                                <td style="text-align: center">
+                                    <a href="javascript:;" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Es el nombre de la variable que se calcula en el numerador de la formula del indicador"><i class="material-icons">info</i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Denominador:</label></td>
+                                <td>
+                                    <input type="text" ng-model="Indicadores.nombre_denominador" id="denominador" placeholder="Nombre de la variable">
+                                </td>
+                                 <td style="text-align: center">
+                                      <a href="javascript:;" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Es el nombre de la variable que se calcula en el denominador de la formula del indicador, esta variable es opcional."><i class="material-icons">info</i></a>
+                                </td>
+                            </tr>
+                            
+                
+                        </table>
+                    <br><br>
+                                    <button class="btn waves-effect waves-light green " title="Guardar" id="guardar" ng-click="guardar();"  ><i class="material-icons">save</i></button>
+                                    <button class="btn waves-effect waves-light blue"  title="Actualizar" id="actualizar" ng-click="modificar();" disabled="" ><i class="material-icons">save</i></button>
+                                   <button class="btn waves-effect waves-light red"  title="limpiar" id="limpiar" ng-click="limpiar();" disabled=""><i class="material-icons">clear</i></button>
+                               
+                  </div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="col s8 z-depth-1 white" style="margin-left: 10px;">
+             <div class="contenedor">
+                 <div class="row">
+                     <div class="col s8">
+                         .
+                     </div>
+                         <div class="col s4">
+
+                        <div style='width:32px;float: left'>
+                            <i class="material-icons left">search</i>
+                        </div>
+                        <div style='float: left'>
+                            <small>Buscador</small>
+                        </div>
+                        <input id="search" type="text" placeholder="Item" ng-model="filtro" required>
+
+                    </div>
+                        </div>
+                <div class="row">
+                  
+            <h2>Listado de Indicadores</h2>
+            <table  class="striped">
+                            <thead>
+                            <th width="20px">
+                                
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Meta
+                            </th>
+                            <th>Formula</th>
+                            <th>
+                                Periodicidad
+                            </th>
+      
+                            <th>
+                                Proceso
+                            </th>
+                            <th>
+                                Sentido
+                            </th>
+                     
+                           <th width="10px" colspan="3">
+                                Opciones
+                            </th>
+                            
+                            </thead>
+                            <tbody>
+             <tr ng-repeat ="item in listaIndicadores | filter: filtro  | orderBy:'i.nombre' " >
+                                    <td>{{item.i.id}}</td>
+                                    <td>{{item.i.nombre}}</td>
+                                   <td>[{{item.i.limiteInferior}} , {{item.i.limiteSuperior}}]</td>
+                                     <td ng-if="item.i.nombre_denominador == 'none'">{{item.i.nombre_numerador}}</td>
+                     <td ng-if="item.i.nombre_denominador != 'none'">{{item.i.nombre_numerador}} / {{item.i.nombre_denominador}} </td>
+                                   <td ng-if="item.i.frecuencia == 1">Mensual</td>
+                                   <td ng-if="item.i.frecuencia == 2">Bimensual</td>
+                                   <td ng-if="item.i.frecuencia == 3">Trimestral</td>
+                                   <td ng-if="item.i.frecuencia == 6">Semestral</td>
+                                   <td ng-if="item.i.frecuencia == 12">Anual</td>
+                                   <!--<td>{{item.i.unidadMedida}}</td>-->
+                                   <td>{{item.i.nombreProceso}}</td>
+                                   <td ng-if="item.i.sentido == '1'" style="text-align: center;color:#00c853" title="Positivo"><i class="material-icons">call_made</i> (+)</td>
+                                   <td ng-if="item.i.sentido == '0'" style="text-align: center;color:#b71c1c;" title="Negativo"><i class="material-icons">call_received</i> (-)</td>
+                                   <!--<td>{{item.responsable}}</td>-->
+                                    
+                                    <td style="text-align: center;"><a href="javascript:;" title="Visualizar" ng-click="modalIndicador(item);"><i class="material-icons">visibility</i></a></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="editar" ng-click="cargarModificar(item);"><i class="material-icons" style="color:#00c853">create</i></a></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="eliminar"  ng-click="eliminar(item.i.id);"><i class="material-icons" style="color:#F44336">delete</i></a></td>
+                                </tr>
+                            </tbody>    
+                        </table>
+            <br>
+        </div>
+                </div>
+             </div>
+        
+    </div>
+   
+    <div>
+        
+    </div>
+    
+    <div class="modal modal-fixed-footer" id="indicador" style="width:100%;min-height: 90%">
+        <div class="modal-content" style="padding:0">
+            <div class="row">
+                <div class="col s5">
+                     <div class="col s12 red darken-3" style="background-color:#c3c3c3;padding-top:20px">
+                               <h2 style="color:#FFF;font-size:20px; font-weight:900">Indicador: {{indicador.i.nombre}}</h2>
+                               </div> 
+            <table class="striped">
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Responsable:</p></td>
+                    <td>{{indicador.responsable.nombre}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Fuente:</p></td>
+                    <td>{{indicador.i.fuente}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Categoria:</p></td>
+                    <td>{{indicador.i.nombreCategoria}}</td>
+                     <td><p style="font-weight:900; font-size:16px;">Sub-categoria:</p></td>
+                    <td>{{indicador.i.nombreSubcategoria}}</td>
+                </tr>
+               
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Proceso:</p></td>
+                    <td>{{indicador.i.nombreProceso}}</td>
+                    <td><p style="font-weight:900; font-size:16px;">Subproceso:</p></td>
+                    <td>{{indicador.i.nombreSubproceso}}</td>
+                </tr>
+              
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Periodicidad:</p></td>
+                                     <td ng-if="indicador.i.frecuencia == 1">Mensual</td>
+                                   <td ng-if="indicador.i.frecuencia == 2">Bimensual</td>
+                                   <td ng-if="indicador.i.frecuencia == 3">Trimestral</td>
+                                   <td ng-if="indicador.i.frecuencia == 6">Semestral</td>
+                                   <td ng-if="indicador.i.frecuencia == 12">Anual</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Unidad de medida:</p></td>
+                    <td>{{indicador.i.medidaNombre}}</td>
+                     <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Meta:</p></td>
+                    <td>[{{indicador.i.limiteInferior}} , {{indicador.i.limiteSuperior}}]</td>
+                     <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Sentido:</p></td>
+                  
+                      <td ng-if="indicador.i.sentido == '1'" style="text-align: left;color:#00c853" title="Positivo"><i class="material-icons">call_made</i> (+)</td>
+                      <td ng-if="indicador.i.sentido == '0'" style="text-align: left;color:#b71c1c;" title="Negativo"><i class="material-icons">call_received</i> (-)</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+               
+                                <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Formula:</p></td>
+                    <td ng-if="indicador.i.nombre_denominador == 'none'">{{indicador.i.nombre_numerador}}</td>
+                     <td ng-if="indicador.i.nombre_denominador != 'none'">{{indicador.i.nombre_numerador}} / {{indicador.i.nombre_denominador}} </td>
+                 <td></td>
+                    <td></td>
+                                </tr>
+                 <tr>
+                    <td><p style="font-weight:900; font-size:16px;">Estado:</p></td>
+                    <td><span class="bage  green darken-2" style="margin-left: 10px;margin-top:20px;font-size:12px;">{{indicador.i.estado}}</span></td>
+                 <td></td>
+                    <td></td>
+                 </tr>
+            </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+        </div>
+    </div>
+
+    
+    <div class="modal modal-fixed-footer" id="medidas" style="width:40%;min-height: 50%">
+        <div class="modal-content" style="padding:0">
+        <div class="col s12">
+            <div class="contenedor">
+                <div class="row">
+                        <h2>Unidades de medidas</h2>
+                        <table  class="striped">
+                            <thead>
+                            <th width="20px">
+                                
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            <th width="10px">
+                                
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: transparent;">
+                                    <td><input type="text" ng-model="Medidas.id" disabled="true"></td>
+                                    <td><input type="text" ng-model="Medidas.nombre"></td>
+                                    <td><button class="btn waves-effect waves-light green " title="Guardar" id="guardarMedidas" ng-click="guardarMedidas();" disabled="" ><i class="material-icons">save</i></button></td>
+                                    <td><button class="btn waves-effect waves-light blue"  title="Actualizar" id="actualizarMedidas" ng-click="modificarMedidas();" disabled="" ><i class="material-icons">save</i></button></td>
+                                    <td><button class="btn waves-effect waves-light red"  title="limpiar" id="limpiarMedidas" ng-click="limpiarMedidas();"><i class="material-icons">clear</i></button></td>
+                                </tr>
+                                <tr ng-repeat ="item in listaMedidas">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.nombre}}</td>
+                                    <td></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="editar" ng-click="cargarModificarMedidas(item);"><i class="material-icons">create</i></a></td>
+                                    <td style="text-align: center;"><a href="javascript:;" title="eliminar"  ng-click="eliminarMedidas(item.id);"><i class="material-icons" style="color:#F44336">remove</i></a></td>
+                                </tr>
+                            </tbody>    
+                        </table>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal-footer">
+            <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+   
+
+
+
+
+<script>
+          $(document).ready(function() {
+              $('.tooltipped').tooltip({delay: 50});
+          });
+ </script>

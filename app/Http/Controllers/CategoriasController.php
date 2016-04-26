@@ -7,19 +7,19 @@ use Illuminate\Http\JsonResponse;
 
 use App\Http\Controllers\Controller;
 
-use App\Documento;
+use App\Categoria;
 
-class DocumentosController extends Controller
+class CategoriasController extends Controller
 {
     
 
     
-    public function show($idDocumento){       
-        return Documento::find($idDocumento); 
+    public function show($idCategoria){       
+        return Categoria::find($idCategoria); 
     }
     
     public function getAll(){
-        return Documento::all();  
+        return Categoria::all();;   
     }
 
         /**
@@ -30,7 +30,7 @@ class DocumentosController extends Controller
     public function index()
     {
         try {
-            return Documento::all();   
+            return Categoria::all();   
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -49,17 +49,16 @@ class DocumentosController extends Controller
         try {           
             $data = $request->all();
         
-            $documento = new Documento();
-            $documento->nombre = $data["nombre"];
-            $documento->sigla = $data["sigla"];
-            $documento->save();
+            $categoria = new Categoria();
+            $categoria->nombre = $data["nombre"];
+            $categoria->save();
             
      
      
-            return JsonResponse::create(array('message' => "Documento Guardado Correctamente", "request" => $documento), 200);
+            return JsonResponse::create(array('message' => "Categoria Guardado Correctamente", "request" => $categoria), 200);
             
         } catch (Exception $exc) {
-            return JsonResponse::create(array('message' => "No se pudo guardar el Documento", "exception"=>$exc->getMessage(), "request" =>json_encode($data)), 401);
+            return JsonResponse::create(array('message' => "No se pudo guardar el Categoria", "exception"=>$exc->getMessage(), "request" =>json_encode($data)), 401);
         }
         
     }
@@ -77,17 +76,17 @@ class DocumentosController extends Controller
             
             $data = $request->all();
             
-            $documento = Documento::find($id);
+            $categoria = Categoria::find($id);
 
-            $documento->nombre = $data["nombre"];
-            $documento->sigla= $data["sigla"];
+             $categoria->nombre = $data["nombre"];
+         
         
             
-            $documento->save();
+            $categoria->save();
             
         
             
-        return JsonResponse::create(array('message' => "Documento Modificado Correctamente", "request" =>json_encode($data)), 200);
+        return JsonResponse::create(array('message' => "Categoria Modificado Correctamente", "request" =>json_encode($data)), 200);
             
         } catch (Exception $exc) {
             return JsonResponse::create(array('message' => "No se pudo Modificar la marca", "exception"=>$exc->getMessage(), "request" =>json_encode($data)), 401);
@@ -104,12 +103,11 @@ class DocumentosController extends Controller
     public function destroy($id)
     {
         try {
-           
-           $documento = Documento::find($id);
-           $documento->delete();
-            return JsonResponse::create(array('message' => "Documento  Eliminado Correctamente", "request" =>json_encode($id)), 200);
+            $categoria = Categoria::find($id);
+            $categoria->delete();
+            return JsonResponse::create(array('message' => "Categoria Eliminado Correctamente", "request" =>json_encode($id)), 200);
         } catch (Exception $ex) {
-            return JsonResponse::create(array('message' => "No se pudo Eliminar el documento", "exception"=>$ex->getMessage(), "request" =>json_encode($id)), 401);
+            return JsonResponse::create(array('message' => "No se pudo Eliminar la marca", "exception"=>$ex->getMessage(), "request" =>json_encode($id)), 401);
         }
     }
 }

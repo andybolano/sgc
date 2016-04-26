@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sgc'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
             'prefix'   => '',
         ],
 
-        'mysql' => [
+        'sgc' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             'database'  => env('DB_DATABASE', 'forge'),
@@ -63,6 +63,21 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],
+        
+        
+        'funcionarios' => [
+            'driver'    => 'mysql',
+            'host'      => env('FU_HOST', 'localhost'),
+            'database'  => env('FU_DATABASE', 'forge'),
+            'username'  => env('FU_USERNAME', 'forge'),
+            'password'  => env('FU_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+        
+        
 
         'pgsql' => [
             'driver'   => 'pgsql',

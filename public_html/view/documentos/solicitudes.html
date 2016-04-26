@@ -1,0 +1,245 @@
+<div class="contenedor" style="zoom:85%;"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+        
+            <div class="contenedor" ng-controller="solicitudesController" data-ng-init="cargarAllSolicitides()">
+                <h2>Documentos en espera de aprobación</h2>
+            
+            
+            <table  class="striped bordered">
+                            <thead>
+                            <th>No</th>
+                            <th>PROCESO</th>
+                            <th>
+                                SUBPROCESO
+                            </th>
+                            <th>
+                                RESPONSABLE
+                            </th>
+                            <th>
+                              CODIGO
+                            </th>
+                            <th>
+                              NOMBRE DEL DOCUMENTO
+                            </th>
+                            <th>
+                               VERSIÓN
+                            </th>
+                            <th>
+                             FECHA DE ACTUALIZACIÓN
+                            </th>
+                            <th>
+                               CAMBIO
+                            </th>
+                            <th>
+                                FECHA DE REVISIÓN
+                            </th>
+                            <th>
+                               RESPONSABLE DE APROBACIÓN
+                            </th>
+                            <!--<th>
+                              Externo
+                            </th>-->
+                            <th>
+                                ESTADO
+                            </th>
+                            <th width="5%" style="text-align: center">FORT. DE CAMBIOS</th>
+                           
+                            <th colspan="2">
+                             
+                            OPCIONES
+                                
+                            </th>
+                            <th>
+                               APROBAR 
+                           </th> 
+                            <th>
+                               COMITE
+                           </th>
+                           <th>
+                               RESPONDER
+                           </th>
+                            </thead>
+                            <tbody>
+                                 <tr style="background-color:#FFF; display: block"  id="loading">
+                                    <td colspan="14" style="text-align: center;">
+                                        </br> </br> </br>
+                                          <div class="col s12" style="margin-left:700%">
+                                            <img src="../images/loading.gif" style="width:70px;">   
+                                        </div>
+                                        </br> </br> </br>
+                                 
+                                    </td>
+                                </tr>
+                                 <tr ng-repeat ="item in solicitudes" page-size="20" tolerance="100">
+                                     <td>{{$index + 1}}</td>
+                                    <td>{{item.archivo.nam_proceso}}</td>
+                                     <td>{{item.archivo.nam_subproceso}}</td>
+                                     <td>{{item.nombreResponsable}}</td>
+                                    <td width="5%">{{item.archivo.codigo}}</td>
+                                    
+                                    <td>{{item.archivo.nombre}}</td>
+                                    
+                                    
+                                     <td>{{item.archivo.version}}</td>
+                                    <td>{{item.archivo.fecha}}</td>
+       
+                                         <td style="text-align: center" ><a href="javascript:;" ng-click="modalNota(item.archivo.nota,item.archivo.nombre, item.archivo.version)"><i class="material-icons">message</i></a></td>
+                                         <td>2016-10-01</td>
+                                         <td>{{item.nombreResponsableApro}}</td>
+                                         <td width="15%"><span class="bage teal darken-2">{{item.archivo.estado}}</span></td>
+                                         <td style="text-align: center" ><a href="javascript:;" ng-click="modalFormatoCambios(item.archivo.descripcion,item.archivo.razones,item.archivo.afecta,item.archivo.necesidades,item.archivo.flujo, item.archivo.ajuste)"><i class="material-icons">assignment</i></a></td>
+
+                                    <!--<td ng-if="item.externo =='true'"><img src='../../images/done.png' width="20px" style='border-radius:50%'></td>
+                                    <td ng-if="item.externo =='false'"><img src='../../images/close.png' width="20px" style='border-radius:50%'></td>
+                                   -->
+                                    
+                              
+                                   
+                                  
+                                   <td ng-if="item.archivo.extension == 'pdf' || item.archivo.extension == 'xlsx'"><a href="https://docs.google.com/viewer?url={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td ng-if="item.archivo.extension != 'pdf' && item.archivo.extension != 'xlsx' "><a href="http://view.officeapps.live.com/op/view.aspx?src={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td><a href="{{item.archivo.url}}" target="_blank" title="Descargar"><i class="material-icons">cloud_download</i></a></td>
+                                   
+                                   
+                                   <td ng-if="item.archivo.aprobacionresponsable == '0' || item.archivo.aprobacionresponsable== '2' " style="text-align: center;">
+                                       <button class="waves-effect waves-light btn-improvised" title="Click aquí para aprobar este documento" ng-click="actualizarEstado(item.archivo.idDoc,1)">
+                                           <i class="material-icons center"></i>
+                                       </button>
+                                       <div ng-if="item.archivo.aprobacionresponsable == '2'"><i class="material-icons" style="color:#b71c1c;" title="Esto indica que ha sido rechazado">close</i></div>
+                                   </td>
+                                   <td ng-if="item.archivo.aprobacionresponsable == '1' " style="text-align: center;"><i class="material-icons" style="color:#558B2F;" title="Esto indica que ha sido aprobado por el comite de calidad">done</i></td>
+                                       
+                                   <td ng-if="item.archivo.aprobacioncomite == '0'"><i class="material-icons" style="color:#ef6c00;" title="Esto indica que no se pronunciando una respuesta">pan_tool</i></td>
+                                   <td ng-if="item.archivo.aprobacioncomite == '2'"><i class="material-icons" style="color:#b71c1c;" title="Esto indica que ha sido rechazado">close</i></td>
+                                   <td ng-if="item.archivo.aprobacioncomite == '1'"><i class="material-icons" style="color:#558B2F;" title="Esto indica que ha sido aprobado por el calidad">done</i></td>
+                                   <td style="text-align: center">
+                                       <a href="javascript:;"  ng-click="modalRespuesta(item.archivo.nombre, item.archivo.idDoc)"><i class="material-icons" style="color:#b71c1c;">speaker_notes</i></a>
+                                       <span class="bage orange" ng-if="item.archivo.revisionresponsable == '0'">1</span>
+                                   </td>
+                                   
+                                   
+                               
+                                   </tr>
+                            </tbody>    
+                        </table>
+                
+                <div class="modal modal-fixed-footer" id="nota">
+                           <div class="modal-content">
+                               <p style="font-size:16px;">Cambios realizados en : <span id="nombreArchivo" style="font-weight:600">{{nombre}}</span> </p>
+                               <p style="font-size:16px;">Version : <span id="nombreArchivo" style="font-weight:600">{{version}}</span> </p>
+                               <div class="row">
+                                   {{nota}}
+                               </div>
+                            </div>
+                                <div class="modal-footer">
+                                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                </div>
+                        </div>
+                
+                <div class="modal modal-fixed-footer" id="formatocambios" style="min-height: 90%;">
+                    <div class="modal-content">
+                        <p style="font-size:16px;font-weight:900">PLANIFICACIÓN CAMBIOS QUE AFECTAN SISTEMA DE GESTIÓN DE CALIDAD <br> <span id="nombreArchivoFormato" style="font-weight:600"></span> </p>
+                               <div class="row">
+                                   <p style="font-size:16px;">DESCRIPCIÒN DEL CAMBIO: </p>
+                                   <textarea id="descripcionCambio"  ng-model="formatocambios.descripcion" value="" disabled>
+                                       
+                                   </textarea>
+                               </div>
+                                <div class="row">
+                                   <p style="font-size:16px;">RAZONES DEL CAMBIO: </p>
+                                   <textarea id="razonesCambio" ng-model="formatocambios.razones"  value="" disabled>
+                                       
+                                   </textarea>
+                               </div>
+                               <div class="row">
+                                   <p style="font-size:16px;">COMO AFECTA EL CAMBIO AL SISTEMA DE GESTIÓN DE LA CALIDAD: </p>
+                                   <textarea id="afectaCambio" value="" ng-model="formatocambios.afecta"  disabled>
+                                       
+                                   </textarea>
+                               </div>
+                               <div class="row">
+                                   <p style="font-size:16px;">NECESIDADES DE DOCUMENTACIÓN/PERSONAL/EQUIPO/INSTALACIONES:</p>
+                                   <textarea id="necesidadesCambio" value="" ng-model="formatocambios.necesidades"  disabled>
+                                       
+                                   </textarea>
+                               </div>
+                               <div class="row">
+                                   <p style="font-size:16px;">FLUJO DE ACTIVIDADES Y REGISTROS NECESARIOS:</p>
+                                   <textarea id="flujoCambio" value="" ng-model="formatocambios.flujo"  disabled>
+                                       
+                                   </textarea>
+                               </div>
+                               <div class="row">
+                                   <p style="font-size:16px;">AJUSTES NECESARIOS PARA MANTENER EL SISTEMA:</p>
+                                   <textarea id="ajusteCambio" value="" ng-model="formatocambios.ajuste"  disabled>
+                                       
+                                   </textarea>
+                               </div>
+                    </div>
+                     <div class="modal-footer">
+                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                     </div>
+                </div>
+                
+                  
+                <div class="modal modal-fixed-footer" id="respuesta" style="min-height: 90%;width:90%">
+                    <div class="modal-content">
+                        
+                        <p style="font-size:16px;font-weight:900">RESPUESTAS PARA: <span id="nombreArchivo" style="font-weight:600">{{nombre}}</span> </p>
+                               <div class="row">
+                                   <div class="col s7">
+                                       <p>Historia de respuestas</p>
+                                       <table class="striped bordered">
+                                           <thead>  
+                                               <th width="55%">
+                                                   Mensaje
+                                               </th>
+                                               <th width="15%">
+                                                   Fecha
+                                               </th>    
+                                               <th width="15%">
+                                                   Grupo Emisor
+                                               </th>
+                                               <th width="15%">
+                                                   Nombre Emisor
+                                               </th>
+                                               <th>
+                                                   Revisado
+                                               </th>
+                                           </thead>
+                                           <tbody>
+                                               <tr ng-repeat ="item in historiadocumentos">
+                                                   <td>{{item.mensaje}}</td>
+                                                   <td>{{item.fecha}}</td>
+                                                   
+                                                   <td>{{item.emisor}}</td>
+                                                   <td>{{item.nombre}}</td>
+                                                              <td ng-if="item.revisado =='0'" style="text-align:center;"><i title="Este mensaje aun no ha sido revisado por el funcionario" class="material-icons center" style="color:#ef6c00;">report</i></td>
+                                                   <td ng-if="item.revisado =='1'" style="text-align:center;"><i title="Ya este mensaje ha sido revisado por el funcionario" class="material-icons center " style="color:#558B2F;">done</i></td>
+                                               </tr>
+                                           </tbody>    
+                                       </table> 
+                                   </div>
+                                   <div class="col s5">
+                                   <textarea id="mensaje" placeholder="Ingrese su mensaje aqui" autofocus>
+                                       
+                                   </textarea>
+                                       <div style="text-align: right;">
+                                           <button  class="btn" ng-click='enviarRespuesta(idDocumentoActual);'>Enviar mensaje y Rechazar</button>
+                                       </div>
+                                   </div>
+                               </div>
+                               
+                    </div>
+                     <div class="modal-footer">
+                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                     </div>
+                </div>
+                
+            
+        </div>
+        </div>
+    </div>
+</div>
+

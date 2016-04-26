@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Proceso extends Model
+class Cargo extends Model
 {
- 
-    protected $connection = 'sgc';
+    protected $connection = 'funcionarios';
     
-    protected $table = "procesos";
+    protected $table = "cargos";
     
     public $timestamps = false;
     

@@ -1,0 +1,405 @@
+<div class="contenedor" style="zoom:80%;"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+            <div class="contenedor"  ng-controller="archivosController" data-ng-init="cargarArchivosExternos()">
+                <div class="row">
+                
+                 <div class="row">
+                     <div class="col s8">
+                         .
+                     </div>
+                         <div class="col s4">
+
+                        <div style='width:32px;float: left'>
+                            <i class="material-icons left">search</i>
+                        </div>
+                        <div style='float: left'>
+                            <small>Buscador</small>
+                        </div>
+                        <input id="search" type="text" placeholder="Item" ng-model="filtro" required>
+
+                    </div>
+                        </div>
+   
+                  <div class="col s2" style="border:1px solid #000;height:120px;border-top-left-radius:20px;border-bottom-left-radius:20px;border-right:0px">
+                      <center><img src="../images/logo-formato.png" style="height:90px;margin-top: 10px"></center>
+                    </div>
+                      <div class="col s8" style="border:1px solid #000;height:120px;border-right:0px"> 
+                          <br>
+                          <center><h5 style="font-size:22px;color:#0079C6;font-family:palatino;font-weight:600">FORMATO</br>LISTADO MAESTRO DE DOCUMENTOS EXTERNOS</h5></center>
+                      </div>
+                    <div class="col s2" style="padding:0;border:1px solid #000;height:120px;border-top-right-radius:20px;border-bottom-right-radius:20px;">
+                        <table style="padding:0;margin: 0;font-size:16px;font-family:palatino;font-weight:600">
+                            <tr style="padding:0;margin: 0;border-bottom: 1px solid #000">
+                                <td>Código:SEG-FT-03</td>
+                            </tr>
+                            <tr  style="border-bottom: 1px solid #000">
+                                <td>Versión:04</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #000">
+                                <td >Actualización:06/02/2016</td>
+                            </tr>
+                            <tr>
+                                <td>Paginas:1 de 1</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                        <table  class="striped">
+                            <thead>
+                            <th>No</th>
+                            
+                            <th style="text-align: center">
+                                PROCESO
+                            </th>
+                            <th style="text-align: center">
+                                SUBPROCESO
+                            </th>
+                            <th style="text-align: center">
+                               RESPONSABLE
+                            </th>
+                            <th style="text-align: center">
+                              NOMBRE DEL DOCUMENTO
+                            </th>
+                            <th style="text-align: center">
+                                FECHA DE ACTUALIZACIÓN
+                            </th>
+                          
+                            <th style="text-align: center">
+                                ORIGEN DEL DOCUMENTO
+                            </th>
+                            <th style="text-align: center">
+                                ESTADO
+                            </th>
+                            <th style="text-align: center">
+                                FECHA DE REVISIÓN
+                            </th>
+                            <th style="text-align: center">
+                             UBICACIÓN
+                            </th>
+                            <th>
+                                Opciones
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color:#FFF;border-bottom: 1px solid #c3c3c3;height:60px;">
+                                    <td>
+                                    
+                                    </td>
+                                    <td>
+                                     <select ng-model="externo.proceso" onchange="angular.element(this).scope().cargarSubprocesosExternos(this.value)"  id="proceso" class="browser-default">
+                                          <option ng-repeat="item in listaProcesos" value="{{item.id}}">{{item.nombre}}</option>
+                                      </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="externo.subproceso"  id="subproceso" class="browser-default">
+                                              <option ng-repeat="item in listaSubprocesos" value="{{item.id}}">{{item.nombre}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                       <select  ng-model="externo.responsable" id="responsable" class="browser-default">
+                                              <option ng-repeat="item in listaCargos" value="{{item.id}}">{{item.nombre}}</option>
+                                        </select> 
+                                    </td>
+                                    <td>
+                                        <input ng-model="externo.nombreDocumento" type="text">
+                                    </td>
+                                    <td>
+                                        <input id="fecha" type="date" class="browser-default"  style="width:90%;">
+                                    </td>
+                                    <td>
+                                         <input ng-model="externo.origen" type="text">
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <input ng-model="externo.ubicacion" type="text">
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                   
+                                    <td colspan="4"><button class="btn waves-effect waves-light green " title="Guardar" id="guardar" ng-click="guardarExterno();" ><i class="material-icons" >save</i></button></td>
+                                  
+                            
+                                </tr>
+                                <tr ng-repeat ="item in listaArchivosExternos | filter: filtro | orderBy:'archivo.codigo'" page-size="20" tolerance="100">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.archivo.nam_proceso}}</td>
+                                    <td>{{item.archivo.nam_subproceso}}</td>
+                                    <td>{{item.nombreResponsable}}</td>
+                                    <td>{{item.archivo.nombre}}</td>
+                                    <td>{{item.archivo.fecha}}</td>
+                                    <!--<td style="text-align: center;"><span class="bage">{{item.archivo.version}}</span></td>
+                                    -->
+                                    <td title="{{item.archivo.ubicacion}}">{{item.archivo.ubicacion | limitTo: 30 }}{{myString.length > 30 ? '...' : ''}}</td>
+                                    <!--<td ng-if="item.externo =='true'"><img src='../../images/done.png' width="20px" style='border-radius:50%'></td>
+                                    <td ng-if="item.externo =='false'"><img src='../../images/close.png' width="20px" style='border-radius:50%'></td>
+                                   <td style="text-align: center"><a href="javascript:;" ng-click="modalNota(item.archivo.nota,item.archivo.nombre,item.archivo.version)"><i class="material-icons">message</i></a></td>
+                                   --><td><span class="bage  orange darken-2">{{item.archivo.estado}}</span></td>
+                                   <td>2016-06-30</td>
+                                   
+                                   <td ng-if="item.archivo.extension == ''"><a href="{{item.archivo.url}}">{{item.archivo.url}}</a></td>
+                                   <td ng-if="item.archivo.extension != ''">{{item.archivo.url}}</td>
+                                   
+                                  <!-- <td style="text-align: center"><a href="javascript:;" title="Editar informacion del archivo" ng-click="modalEdit(item)"><i class="material-icons" style="color:#4CAF50">edit</i></a></td>-->
+                                   <!--<td style="text-align: center"><a href="javascript:;" title="Establecer nueva version" ng-click="nuevaVersion(item)"><i class="material-icons" style="color:#c62828">note_add</i></a></td>
+                                  --> <td ng-if="item.archivo.extension == 'pdf' || item.archivo.extension == 'xlsx' && item.archivo.extension != '' "><a href="https://docs.google.com/viewer?url={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td ng-if="item.archivo.extension != 'pdf' && item.archivo.extension != 'xlsx' && item.archivo.extension != ''  "><a href="http://view.officeapps.live.com/op/view.aspx?src={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td><a href="{{item.archivo.url}}" target="_blank"><i class="material-icons" title="Descargar">cloud_download</i></a></td>
+                                   <!--<td><a href="javascript:;" ng-click="eliminar(item.archivo.id)"><i class="material-icons" style="color:#c62828">delete</i></a></td>
+                                --></tr>
+                            </tbody>    
+                        </table>
+                         
+                </div>   
+
+                
+                
+                
+                <div class="modal modal-fixed-footer" id="nuevaVersion"  style="min-width:100%;min-height:80%;">
+                           <div class="modal-content" style="padding:0">
+                              
+                               <div class="row">
+           
+                                   <div class="col s4">
+                                       
+                            <div class="col s12 red darken-3" style="background-color:#c3c3c3;padding-top:20px">
+                               <h2 style="color:#FFF;font-size:20px;">Nueva version del documento: <span id="nombreArchivo" style="font-weight:600;color:#FFF;">{{nombre}}</span> </h2>
+                               </div>
+                                       
+                                    <div class="row">
+                                    <div class="col s6">
+                                        <p style="font-size:16px;">Version Actual:&nbsp;&nbsp;<span class="bage" style="font-size:14px;">{{version}}</span>
+                   
+                                         <p style="font-size:16px;">Nueva Version:&nbsp;&nbsp;<span class="bage" style="background-color:#fb8c00 ;font-size:14px">{{version-0 + (1-0) | number}}</span>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>Cambios realizados</label>
+                                        <textarea id="notaNuevaVersion" class="browser-default" ng-model="File.cambios" rows="40" cols="10" style="height:120px;">
+
+                                        </textarea>
+                                    </div>
+                                       <div class="row">
+                                             <form>
+                                                <input type="file" id="file" uploader-model="File.documento"  onchange="angular.element(this).scope().visualizarOne()">
+                                            </form>
+                                       </div>
+                                       
+                                        <table>
+                                           <thead>
+                                           <th>
+                                               id
+                                           </th>
+                                            <th>
+                                               Nombre
+                                           </th>
+                                            <th>
+                                               Tamaño
+                                           </th>
+                                           <th>
+                                               version
+                                           </th>
+                                           <th>
+                                               fecha
+                                           </th>
+                                           </thead>    
+                                           <tbody id="listaVersion">
+                                               
+                                           </tbody>
+                                       </table>
+                                       
+                                   </div>
+                                   
+                                   <div class="col s8">
+                                       <br>
+                                       <h2>Historial de Documento</h2>
+                                       <table>
+                                           <thead>
+                                           <th>
+                                               id
+                                           </th>
+                                           <th>
+                                               funcionario responsable
+                                           </th>
+                                           <th>Ubicacion</th>
+                                           <th>
+                                               version
+                                           </th>
+                                           <th>
+                                               cambios
+                                           </th>
+                                           <th>
+                                               fecha
+                                           </th>
+                                           <th>
+                                               estado
+                                           </th>
+                                           </thead>
+                                           <tbody>
+                                               <tr ng-repeat="item in Historial">
+                                                   <td>{{item.id}}</td>
+                                                   <td> <img alt="image" class="circle" style="border:2px solid #FFFFFF;" src="../blob.php?id={{item.idFuncionario_subio}}" alt="Contact Person" class='profile' width="54px;" height="54px;">  </td>
+                                                   <td><a href="{{item.url}}">{{item.url}}</a></td>
+                                                   <td>{{item.version}}</td>
+                                                   <td>{{item.nota}}</td>
+                                                   <td>{{item.fecha}}</td>
+                                                   <td ng-if="item.estado == 'VIGENTE'"><span class="bage  orange darken-2" >{{item.estado}}</span></td>
+                                                   <td ng-if="item.estado == 'OBSOLETO'"><span class="bage  grey darken-3">{{item.estado}}</span></td>
+                                               </tr>
+                                           </tbody>
+                                       </table>
+                                       
+                                   </div>
+                             </div>
+                           </div>
+                                <div class="modal-footer">
+                                    <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn green " style="margin-left:10px;" ng-click="guardarNuevaVersion();">Guardar</a>
+                                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                      
+                                </div>
+                        </div>
+                
+                
+                 <div class="modal modal-fixed-footer" id="nota">
+                           <div class="modal-content">
+                               <p style="font-size:16px;">Cambios Realizados: <span id="nombreArchivo" style="font-weight:600">{{nombre}}</span> </p>
+                               <p style="font-size:16px;">Version Actual: <span class="bage">{{version}}</span> </p>
+                               <div class="row">
+                                   {{nota}}
+                               </div>
+                            </div>
+                                <div class="modal-footer">
+                                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                </div>
+                        </div>
+                
+                 <div class="modal modal-fixed-footer" id="edit" style="min-width:90%;min-height:80%">
+                           <div class="modal-content" style="padding:0">
+                             
+                           <div class="row">                                         
+                            <div class="col s6 green" style="background-color:#c3c3c3;padding-top:20px">
+                               <h2 style="color:#FFF;font-size:20px;">Editar Informacion de Archivo:<span id="nombreArchivo" style="font-weight:600">{{nombre}}</span> </h2>
+                               </div>
+                           </div>
+                      
+                               
+                         <div class="col s12">
+                               <div class="row">
+                                   <div class="col s2"> 
+                                       <input type="hidden" id="idArchivo">
+                                       <input type="hidden" id="idDocumento">
+                                   <p>Proceso:</p>
+                                   <select id="proceso" class="browser-default" onchange="angular.element(this).scope().cargarSubprocesosEdit(this.value)">
+                                      
+                                   </select>
+                                   </div>
+                                   <div class="col s2"> 
+                                   <p>SubProceso:</p>
+                                   <select id="subproceso" class="browser-default">
+                                      
+                                   </select>
+                                   </div>
+                                   <div class="col s2"> 
+                                   <p>Tipo de documentos:</p>
+                                   <select id="documentos" class="browser-default">
+                                      
+                                   </select>
+                                   </div>
+                                   <div class="col s2"> 
+                                   <p>Fecha Actualizacion:</p>
+                                   <input type="date" id="fechaActualizacion">
+                                   </div>
+                                   <div class="col s2"> 
+                                   <p>Version:</p>
+                                   <input type="number" id="version">
+                                   </div>
+                               </div>
+                            <div class="row">
+                                   
+                                   
+                                   <div class="col s4"> 
+                                   <p>Responsable del Documento:</p>
+                                  <select id="responsableDocumento" class="browser-default" >
+                                      
+                                   </select>
+                                   </div>
+                                <div class="col s4"> 
+                                   <p>Responsable de Aprobacion:</p>
+                                   <select id="responsableAprobacion" class="browser-default">
+                                      
+                                   </select>
+                                   </div>
+                                <div class="col s2"> 
+                                   <p>Estado:</p>
+                                   <select id="estado" class="browser-default">
+                                       <option value="VIGENTE">VIGENTE</option>
+                                       <option value="OBSOLETO">OBSOLETO</option>
+                                   </select>
+                                   </div>
+                               </div>
+                            <div class="row">
+                                 <div class="col s4"> 
+                                    <p>Cambio:</p>
+                                    <textarea id="cambio"  class="browser-default"></textarea>
+                                </div>
+                            </div>
+                              <div class="row">
+                                  
+                                  <div class="col s4">
+                                      <br>Reemplazar Archivo vigente:<br><br>
+                                             <form>
+                                                <input type="file" id="file_edit" uploader-model="File.documento_edit"  onchange="angular.element(this).scope().visualizarOneEdit()">
+                                            </form>
+                                       </div>
+                              </div>
+                             <div class="row">
+                                 <div class="col s6">
+                                        <table>
+                                           <thead>
+                                           <th>
+                                               id
+                                           </th>
+                                            <th>
+                                               Nombre
+                                           </th>
+                                            <th>
+                                               Tamaño
+                                           </th>
+                                           <th>
+                                               version
+                                           </th>
+                                           </thead>    
+                                           <tbody id="listaVersion_edit">
+                                               
+                                           </tbody>
+                                       </table>
+                                 </div>
+                             </div>
+                            </div>
+                           </div>
+                               
+                     
+                     
+                                <div class="modal-footer">
+                                    <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn green " style="margin-left:10px;" onclick="angular.element(this).scope().actualizarAchivos()">Modificar</a>
+                                      <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                </div>
+                        </div>
+                
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    
+
+

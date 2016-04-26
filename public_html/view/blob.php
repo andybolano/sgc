@@ -2,8 +2,8 @@
 header("Content-type: image/gif"); 
 if(isset($_GET['id'])){ 
     $id = $_GET['id']; 
-    $link = mysql_connect("190.8.176.75", "citcodaz_root", "c4m4r4comercio") or die ("ERROR AL CONECTAR"); 
-    $db_select = mysql_select_db("citcodaz_ccBD")or die ("ERROR AL SELECCIONAR DB"); 
+    $link = mysql_connect("107.180.21.19", "timeit", "qaz123") or die ("ERROR AL CONECTAR"); 
+    $db_select = mysql_select_db("timeit")or die ("ERROR AL SELECCIONAR DB"); 
      
     $q = "SELECT foto FROM empleados WHERE noDocumento = $id"; 
     $result = mysql_query($q, $link) or die ("Error al consultar"); 

@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Proceso extends Model
+class Categoria extends Model
 {
- 
     protected $connection = 'sgc';
     
-    protected $table = "procesos";
+    protected $table = "categorias";
     
     public $timestamps = false;
     

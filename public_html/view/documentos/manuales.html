@@ -1,0 +1,138 @@
+<div class="contenedor" style="zoom:85%;"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+            <div class="contenedor" ng-controller="manualesController" data-ng-init="getManuales()">
+                <div  style="position:absolute;top: 155px; right: 24px;">
+                         <img src="../images/loading.gif" width="40px" style="display:none;" id="loading">
+                </div>
+                         <div class="row">
+                    <div class="col s12" >  
+                        <h2>Gestion de Manuales</h2>
+                        <br
+                            <div class="row">
+                         <div class="col s6">
+                    	<section id="envio">
+                             <form>
+                                 <input type="file" id="file" uploader-model="File.documento"  onchange="angular.element(this).scope().visualizarOne()">
+                             </form>
+                        </section>
+                        </div> 
+                    
+                                  <div class="col s6" style="text-align: right">
+                                        <button class="btn green" id="subirArchivos" onclick="angular.element(this).scope().guardar()">Subir Archivo</button>
+                                    </div> 
+                        </div>
+                        <div class="row">
+                              <table>
+                                           <thead>
+                                           <th></th>
+                                            <th>
+                                               Nombre
+                                           </th>
+                                           <th>
+                                               Fecha
+                                           </th>
+                                           <th>
+                                               Tipo de Manual
+                                           </th>
+                                        
+                                           <th>
+                                               ver
+                                           </th>
+                                           <th>
+                                               Anexos
+                                           </th>
+                                          <!-- <th>
+                                               
+                                           </th>-->
+                                           </thead>    
+                                           <tbody id="lista">
+                                               
+                                           </tbody>
+                                           <tr><td colspan="7"><hr></td><tr>
+                                            <tr ng-repeat ="item in listadoManuales">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.url}}</td>
+                                                <td>{{item.fecha}}</td>
+                                                <td>{{item.nombre}}</td>
+                                                <td><a href="http://view.officeapps.live.com/op/view.aspx?src={{item.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                                <td style="text-align: center;"><a href="javascript:;" title="editar" ng-click="cargarAnexos(item);"><i class="material-icons">spellcheck</i></a></td>
+                                               <!-- <td style="text-align: center;"><a href="javascript:;" title="eliminar"  ng-click="eliminar(item.id);"><i class="material-icons" style="color:#F44336">remove</i></a></td>
+                                           --> </tr>
+                                          
+                                       </table>
+                                      
+                         
+                        </div>
+                    </div>
+             
+                             
+                               <div class="modal modal-fixed-footer" id="anexos"  style="min-width:90%;min-height:80%;">
+                           <div class="modal-content" style="padding:0">
+                              
+                               <div class="row">
+                                   <div class="col s6">
+                                       <div class="col s12 red darken-3" style="background-color:#c3c3c3;padding-top:20px">
+                               <h2 style="color:#FFF;font-size:20px;">SUBIR NUEVO ANEXO DE <span id="nombreManual" style="font-weight:600;color:#FFF;"></span> </h2>
+                                       </div><br><br>
+                                       <section id="envio">
+                                        <form>
+                                            <input type="file" id="file_2" uploader-model="File.documento_2"  onchange="angular.element(this).scope().visualizarOne_anexo()">
+                                        </form>
+                                           <input type="hidden" id="id_manual">
+                                   </section>
+                                       <br>
+                                       <table>
+                                           <thead>
+                                           <th>Id</th>
+                                           <th>
+                                               Nombre
+                                           </th>
+                                                <th>
+                                                    tamaño
+                                                </th>
+                                            </thead>
+                                            <tbody id="listaAnexo">
+                                                
+                                            </tbody>
+                                       </table>
+                                       <br><br>
+                                  <div class="col s6" style="text-align: right">
+                                        <button class="btn green" id="subirAnexos" onclick="angular.element(this).scope().guardarAnexos()">Subir Anexo</button>
+                                    </div>
+                                   </div>
+                                   <div class="col s6">
+                                       <table>
+                                           <thead>
+                                           <th>
+                                               Id
+                                           </th>
+                                                <th>
+                                                    Nombre
+                                                </th>
+                                                <th>ver</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat ="item in listadoAnexos">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.url}}</td>
+                                                <td>{{item.nombre}}</td>
+                                                 <td><a href="{{item.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                            </tbody>
+                                       </table>
+                                   </div>
+                                   
+                             </div>
+                           </div>
+                                <div class="modal-footer">
+                                    <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn green " style="margin-left:10px;" ng-click="guardarAnexos();">Guardar</a>
+                                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                      
+                                </div>
+                        </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+  

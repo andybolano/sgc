@@ -1,0 +1,126 @@
+<div class="contenedor" style="zoom:80%;"> 
+    <div class="row white">
+        <div class="col s12 z-depth-1">
+            <div class="contenedor"  ng-controller="archivosController" data-ng-init="cargarArchivosObsoletos()">
+                
+                     <div class="row">
+                     <div class="col s8">
+                         
+                
+                        <h2 style="">DOCUMENTOS OBSOLETOS</h2>
+              
+                   
+                     </div>
+                         <div class="col s4">
+
+                        <div style='width:32px;float: left'>
+                            <i class="material-icons left">search</i>
+                        </div>
+                        <div style='float: left'>
+                            <small>Buscador</small>
+                        </div>
+                        <input id="search" type="text" placeholder="Item" ng-model="filtro" required>
+
+                    </div>
+                        </div>
+         
+                
+                        <table  class="striped">
+                            <thead>
+                            <th></th>
+                            <th>Codigo</th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Proceso
+                            </th>
+                            <th>
+                               Subproceso
+                            </th>
+                            <th>
+                              Tipo de Documento
+                            </th>
+                            <th>
+                                Fecha Actualizacion
+                            </th>
+                            <th>
+                              Version
+                            </th>
+                            <th>
+                                Responsable del Doc.
+                            </th>
+                            <th>
+                                Responsable de Aprob.
+                            </th>
+                            <th>
+                                Ubicacion
+                            </th>
+                            <!--<th>
+                              Externo
+                            </th>-->
+                            <th>
+                                Cambio
+                            </th>
+
+                            <th>
+                                
+                            </th>
+                            <th>
+                                
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat ="item in listaArchivos | filter: filtro | orderBy:'archivo.codigo'" page-size="20" tolerance="100">
+                                    <td>{{$index+1}}</td>
+                                    <td width="5%">{{item.archivo.codigo}}</td>
+                                    <td>{{item.archivo.nombre}}</td>
+                                    <td>{{item.archivo.nam_proceso}}</td>
+                                    <td>{{item.archivo.nam_subproceso}}</td>
+                                    <td>{{item.archivo.nam_documento}}</td>
+                                    <td>{{item.archivo.fecha}}</td>
+                                    <td style="text-align: center;"><span class="bage">{{item.archivo.version}}</span></td>
+                                    <td>{{item.nombreResponsable}}</td>
+                                    <td>{{item.nombreResponsableApro}}</td>
+                                    <td>{{item.archivo.url}}</td>
+                                    <!--<td ng-if="item.externo =='true'"><img src='../../images/done.png' width="20px" style='border-radius:50%'></td>
+                                    <td ng-if="item.externo =='false'"><img src='../../images/close.png' width="20px" style='border-radius:50%'></td>
+                                   --><td style="text-align: center"><a href="javascript:;" ng-click="modalNota(item.archivo.nota,item.archivo.nombre,item.archivo.version)"><i class="material-icons">message</i></a></td>
+                                   <td><span class="bage  orange darken-2">OBSOLETO</span></td>
+                               
+                                   <td ng-if="item.archivo.extension == 'pdf' || item.archivo.extension == 'xlsx'"><a href="https://docs.google.com/viewer?url={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td ng-if="item.archivo.extension != 'pdf' && item.archivo.extension != 'xlsx' "><a href="http://view.officeapps.live.com/op/view.aspx?src={{item.archivo.url}}" target="_blank" title="Visualizar"><i class="material-icons">visibility</i></a></td>
+                                   <td><a href="{{item.archivo.url}}" target="_blank"><i class="material-icons" title="Descargar">cloud_download</i></a></td>
+                               
+                                </tr>
+                            </tbody>    
+                        </table>
+                         
+                   
+
+                
+                
+              
+                
+                
+                 <div class="modal modal-fixed-footer" id="nota">
+                           <div class="modal-content">
+                               <p style="font-size:16px;">Cambios Realizados: <span id="nombreArchivo" style="font-weight:600">{{nombre}}</span> </p>
+                               <p style="font-size:16px;">Version Actual: <span class="bage">{{version}}</span> </p>
+                               <div class="row">
+                                   {{nota}}
+                               </div>
+                            </div>
+                                <div class="modal-footer">
+                                        <a href="javascript:;" class="modal-action modal-close waves-effect waves-light btn red " style="margin-left:10px;">Salir</a>
+                                </div>
+                        </div>
+                
+               
+                
+                
+            </div>
+        </div>
+
+    </div>
+</div>

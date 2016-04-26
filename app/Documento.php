@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Documento extends Model
 {
+    protected $connection = 'sgc';
     
     protected $table = "tipodocumentos";
     

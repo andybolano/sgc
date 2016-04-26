@@ -1,4 +1,4 @@
-var uri = "../../../public";
+var uri = "../../public";
 var gl_resultado = {};
 var app;
 (function(){
@@ -8,23 +8,53 @@ var app;
             
             
             $routeProvider
+             .when("/documentos",{
+                        templateUrl: 'documentos/index.html'
+                    })
             .when("/consultarArchivos",{
-                        templateUrl: 'consultarArchivos.html'
+                        templateUrl: 'documentos/consultarArchivos.html'
+                    })
+                    .when("/solicitudes",{
+                        templateUrl: 'documentos/solicitudes.html'
+                    })
+                    .when("/consultarArchivosExternos",{
+                        templateUrl: 'documentos/consultarArchivosExternos.html'
+                    })
+                    .when("/manuales",{
+                        templateUrl: 'documentos/manuales.html'
                     })
                     .when("/archivos",{
-                        templateUrl: 'archivos.html'
+                        templateUrl: 'documentos/archivos.html'
                     })
                     .when("/procesos",{
-                        templateUrl: 'procesos.html'
+                        templateUrl: 'documentos/procesos.html'
                     })
-                    .when("/documentos",{
-                        templateUrl: 'documentos.html'
+                    .when("/tipodocumentos",{
+                        templateUrl: 'documentos/documentos.html'
                     })
                     .when("/subprocesos",{
-                        templateUrl: 'subprocesos.html'
+                        templateUrl: 'documentos/subprocesos.html'
+                    })
+                    .when("/obsoletos",{
+                        templateUrl: 'documentos/obsoletos.html'
+                    })
+                    .when("/indicadores",{
+                        templateUrl: 'indicadores/index.html'
+                    })
+                    .when("/indicadores/categorias",{
+                        templateUrl: 'indicadores/categorias.html'
+                    })
+                    .when("/indicadores/subcategorias",{
+                        templateUrl: 'indicadores/subcategorias.html'
+                    })
+                    .when("/indicadores/crear",{
+                        templateUrl: 'indicadores/gestionIndicadores.html'
+                    })
+                    .when("/indicadores/medidas",{
+                        templateUrl: 'indicadores/medidas.html'
                     })
                     .otherwise({
-                        redirectTo:"/consultarArchivos"
+                        redirectTo:"/indicadores"
                     });
                     
             

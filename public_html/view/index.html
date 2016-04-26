@@ -1,93 +1,121 @@
 <!DOCTYPE html>
-<html ng-app="timeIt">
+<html ng-app="sgc">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Camara De Comercio - Valledupar</title> 
-        <link href="../css/animate.css" rel="stylesheet">
-
+        <title>SGC - CCV</title> 
+        <link href="../css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/materialize.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/sweetalert.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="../css/style.css" rel="stylesheet"/>
-        <link href="../css/map.css" rel="stylesheet"/>
         <link rel="shortcut icon" href="../public/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../public/favicon.ico" type="image/x-icon">
-    </head>
-    <body class="bg">
-        
-            <div style="width:60%;position: absolute;margin-left:20%;margin-top: 30px;">
-                <center>     
-                    <div class="title">
-                        PROCESOS DE DIRECCIONAMIENTO
-                    </div>
-                </center>
-
-                
-                <div style="margin-top: 22px;">
-                    <div class="line l1"></div>
-                     <div class="line l2"></div>
-
-                    <div class="circle izq">
-                        Planeaciòn estrategica del SGC
-                    </div>
-                    <div class="circle der">
-                        <p>Seguimiento y mejora</p>
-                    </div>
-                </div>
-                
-                    <div class="line l3"></div>
-                    <div class="line l4"></div>
-                 
-                     <div style="margin-top: 160px;position: fixed;margin-left: 253px;">
-                        <p style="color:#000;font-weight: 900;margin-top:-30px;margin-left:80px;position:fixed">PROCESOS MISIONALES</p>
-                     
-                        <div class="centro">
-                            <br>
-                            <p style="color:#000000;font-weight:900">REGISTROS PÚBLICOS</p>
-                            Mercantil - EsaDL<br> proponentes<br>
-                            <p style="color:#000000;font-weight:900">DESARROLLO EMPRESARIAL<br></p>
-                            Logistica y eventos<br>Capacitaciones de interes general<br>
-                        </div>
+              <script>
+                    if (sessionStorage.getItem('session')) {
                          
+                    }else{
+                        window.location.href = "../index.html";
+                    }
+            </script>
+    </head>
+    <body>
+        <div ng-controller="indexController"> 
+            <div class="navbar-fixed" id="nav">    
+                <nav>
+                    <div class="nav-wrapper light-blue darken-4">
+                        <a style="float:left;margin-top:10px;margin-left:10px;width:40px; height:40px;border-radius:6px;text-align: center;" class="waves-effect waves-light" onclick="abrirMenu();">
+                            <i style="line-height:35px;" class="mdi-navigation-menu"></i>
+                        </a>  
+                       <a href="#/home"  class="brand-logo animated bounceIn" style="margin-left:5px;margin-top: 9px;"><img src="../images/logo.png" width="170px;"></a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="javascript:;" class="waves-effect waves-light"><i class="material-icons left" style="font-size:18px;">today</i>{{hoy}}</a></li>
+                            <li><a href="javascript:;" class="waves-effect waves-light" onclick="cerrarSesion();"><i class="material-icons left" style="font-size:18px;">input</i>Salir</a></li>
+                        </ul>
                     </div>
-                 
-                    <div class="line l5"></div>
-                    <div class="line l6"></div>
-                    
-                   <div class="circle_2 izq_2" style="margin-left:0px;">
-                    <p style="margin-top:-50px;color:#c3c3c3;font-weight:900">Clientes</p><br><br>
-                    <p style="font-size: 14px;"> Necesidades y expectativas</p>
-                </div>
-                    
+                </nav>
+            </div>
+
+
+            <div>
+                <ul id="slide-out" class="side-nav fixed menu">
+                    <li class="no-padding">
+                        <ul>
+                              <li class="user">
+                                <div style="text-align: left;padding-top: 20px;padding-left: 10px;">
+                                    <img alt="image" class="circle" style="border:2px solid #FFFFFF;" src="blob.php?id={{usuario.noDocumento}}" alt="Contact Person" class='profile' width="56px;" height="56px;">                            
+                                   <div style="color:#FFFFFF;font-weight:900;margin-top:-15px;">{{usuario.nombres}}</div>                    
+                                    <div style="color:#FFFFFF;margin-top:-25px;font-size:12px;" title="{{usuario.cargo}}">{{usuario.cargo| limitTo: 30 }}{{myString.length > 30 ? '...' : ''}}</div>
+                                </div>
+                            </li> 
+                        </ul>
+                    </li> 
+                    <li><i class="material-icons left">trending_up</i><a href="#/indicadores" style="font-size:12px">Gestion de Indicadores</a></li>
+                     <li ng-if="usuario.idCargo != '11'"><i class="material-icons left">description</i><a href="#/documentos" style="font-size:12px">Gestion de Documentos</a></li> 
                      
-                <div class="circle_2 der_2"  style="margin-right:0px;">
-                    <p style="margin-top:-50px;color:#c3c3c3;font-weight:900">Clientes</p><br><br>
-                    <p style="font-size: 17px;">Satisfacción</p>
-                </div>
-                    
-                    
-                      <div class="line l7"></div>
-                    <div class="line l8"></div>
-                    
-                     <div style="margin-top: 460px; font-weight: 900;position: fixed">
-                         <center style="margin-left:35px;">PROCESOS DE APOYO</center><br>
-                        <div class="footer">
-                            <table width="100%" style="text-align: center;">
-                                <tr>
-                                    <td>Gestión Tecnológica<br>de la informacion</td>
-                                    <td>Gestión del Talento <br>Humano</td>
-                                    <td>Gestión del  <br>Infraestructura</td>
-                                    <td>Gestión del  <br>compras</td>
-                                </tr>    
-                            </table>
-                        </div>
-                    </div>
-         
-       
+                    <li><i class="material-icons left" >settings</i><a href="#/configuracion" style="font-size:12px">Configuracion </a></li>
+                </ul>
+            </div>
+
+            <div ng-view="" id="container" style="padding-left:220px">
+
+            </div>
         </div>
+
+        <!-- jQuery and  -->
+  <script>
+          function cerrarSesion(){
+          Materialize.toast("Sesion finalizada",4000,'rounded');
+          sessionStorage.removeItem('session'); 
+          window.location.href = "../index.html";
+        }
+            </script>
         <script src="../js/jquery/jquery-2.1.1.min.js"></script>
         <script src="../js/materialize.js" type="text/javascript"></script>
+        <script src="../js/sweetalert.min.js" type="text/javascript"></script>
         <script src="../js/angular/angular.js"></script>
         <script src="../js/angular/angular-route.js" type="text/javascript"></script>
         <script src="../js/angular/ui-utils.min.js" type="text/javascript"></script> 
+      
+        
+
+        
+        <script src="../scripts/app.js" type="text/javascript"></script>
+        <!-- controladores-->
+        <script src="../scripts/controllers/indexController.js" type="text/javascript"></script>
+       <script src="../scripts/controllers/documentos/procesosController.js" type="text/javascript"></script>
+       <script src="../scripts/controllers/documentos/tipodocumentoController.js" type="text/javascript"></script>
+       <script src="../scripts/controllers/documentos/subprocesosController.js" type="text/javascript"></script>
+        <script src="../scripts/controllers/documentos/archivosController.js" type="text/javascript"></script>
+        <script src="../scripts/controllers/documentos/manualesController.js" type="text/javascript"></script>
+        <script src="../scripts/controllers/documentos/solicitudesController.js" type="text/javascript"></script>
+        
+        <script src="../scripts/controllers/indicadores/categoriasController.js" type="text/javascript"></script>
+        <script src="../scripts/controllers/indicadores/subcategoriasController.js" type="text/javascript"></script>
+        <script src="../scripts/controllers/indicadores/indicadoresController.js" type="text/javascript"></script>
+    
+        <script>
+
+
+
+                                var abierto;
+                                $(document).ready(function() {
+                                    
+                                    abierto = true;
+                                    var alto = $(window).height();
+                                    document.getElementById('slide-out').style.height = alto - 40 + "px";
+                                });
+                                function abrirMenu() {
+                                    if (abierto) {
+                                        $("#slide-out").animate({"left": "-=220px"}, 300);
+                                        $("#container").animate({"padding-left": "-=220px"}, 300);
+                                        abierto = false;
+                                    } else {
+                                        abierto = true;
+                                        $("#slide-out").animate({"left": "+=220px"}, 300);
+                                        $("#container").animate({"padding-left": "+=220px"}, 300);
+                                    }
+                                }
+        </script>
     </body>
 </html>
